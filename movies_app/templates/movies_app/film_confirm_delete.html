@@ -1,0 +1,12 @@
+{% extends "movies_app/header.html" %}
+{% block content %}
+<a href="{% url 'film_list' %}" style="color:teal">&lt; Back</a>
+<br></br>
+<br></br>
+<br></br>
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete {{film.film_title}}?</p>
+    <input type="submit" value="Yes">
+</form>
+
+{% endblock %}

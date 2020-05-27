@@ -1,0 +1,12 @@
+{% extends "movies_app/header.html" %}
+{% block content %}
+<a href="{% url 'film_detail' view.kwargs.pk %}" style="color:teal">&lt; Back</a>
+<br></br>
+<br></br>
+<br></br>
+<form  method="post">{% csrf_token %}
+    <p>Are you sure you want to delete your comment "{{object.content}}", posted on {{object.timestamp}}?</p>
+    <input type="submit" value="Yes">
+</form>
+
+{% endblock %}

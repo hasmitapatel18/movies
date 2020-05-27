@@ -1,0 +1,17 @@
+
+{% extends "movies_app/header.html" %}
+<a href="{% url 'film_list' %}" style="color:teal">&lt; Back</a>
+<br></br>
+
+
+{% block content %}
+
+  <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn" type="submit">Register</button>
+  </form>
+
+
+
+{% endblock %}

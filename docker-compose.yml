@@ -12,3 +12,12 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    environment:
+          DATABASE_USER: ${DATABASE_USER}
+          DATABASE_NAME: ${DATABASE_NAME}
+          DATABASE_PASSWORD:
+          DATABASE_HOST: ${DATABASE_HOST}
+          DATABASE_PORT: ${DATABASE_PORT}
+          CLOUD_NAME: ${CLOUD_NAME}
+          API_KEY: ${API_KEY}
+          API_SECRET: ${API_SECRET}

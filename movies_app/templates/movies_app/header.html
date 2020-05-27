@@ -1,0 +1,49 @@
+<head>
+  <!-- Compiled and minified CSS -->
+   {% load static %}
+   <link href={% static 'movies_app/css/materialize.css' %} rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   <!-- css materialize google icons -->
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <!-- Compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body>
+  <h1 class="center-align">MOVIES</h1>
+  <br></br>
+
+  <nav>
+  <div class="nav-wrapper  teal lighten-2  ">
+    <a href="/" class="brand-logo">&nbsp;Home</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      {% if user.is_authenticated %}
+        <li>Logged in as  {{ user.username|capfirst }}&nbsp;</li>
+        <li><a href="{% url 'film_create' %}">Add Film</a></li>
+        <li><a href="../accounts/logout">Logout</a></li>
+      {% else %}
+        <li><a href="register">Register</a></li>
+        <li><a href="../accounts/login">Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+  </nav>
+  {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:2000});</script>
+            {% elif message.tags == 'info'%}
+                <script>M.toast({html: "{{message}}", classes: 'blue rounded', displayLength:2000});</script>
+            {% elif message.tags == 'warning'%}
+                <script>M.toast({html: "{{message}}", classes: 'orange rounded', displayLength:10000});</script>
+            {% elif message.tags == 'error'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+  <br></br>
+  <div class ="container">
+    {%block content%}
+    {%endblock%}
+  </div>
+</body>

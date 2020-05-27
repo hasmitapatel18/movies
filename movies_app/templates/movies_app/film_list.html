@@ -1,0 +1,37 @@
+{% extends "movies_app/header.html" %}
+
+{% block content %}
+
+<div class="row">
+  {%for am in all_movies%}
+  <div class="col s6 m5">
+    <div class="card">
+      <div class="card-image">
+        {% for image in am.images.all %}
+          <img src="{{ image.image_u }} " width="150" height="200">
+        {% endfor %}
+      </div>
+      <div class="card-content">
+      <span class="card-title"><b>{{am.film_title}}</b></span>
+      <p>Year Released: {{am.year}}</p>
+      <p>Genre: {{am.genre}}</p>
+      </div>
+      <div class="card-action">
+      <a href=" {% url 'film_detail' am.id %} " style="color:teal">More</a>
+      <br></br>
+      {% if user.is_staff %}
+      <a href= "{% url 'film_update' am.id %}"<i class=" material-icons small cyan-text">edit</i></a>
+      <a href= "{% url 'film_delete' am.id %}"<i class=" material-icons small cyan-text">delete</i></a>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+
+
+
+
+{% endblock %}

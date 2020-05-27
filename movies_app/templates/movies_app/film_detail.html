@@ -1,0 +1,57 @@
+{% extends "movies_app/header.html" %}
+
+{% block content %}
+<a href="{% url 'film_list' %}" style="color:teal">&lt; Back</a>
+<br></br>
+
+
+<h1>{{ film.film_title }}</h1>
+<br></br>
+<p>Year: {{ film.year }}</p>
+<p>Genre: {{ film.genre }}</p>
+<p>Summary: {{ film.summary }} </p>
+
+<br><br>
+<br><br>
+
+<div class="row">
+  <form method="POST" class="col s12">{% csrf_token %}
+
+    <p><label style="font-size:17px" for="id_content">Leave a comment</label>
+    <input id="id_content" type="text" name="content" maxlength="500" required /></p>
+    <div class="row">
+      <div class="input-field col s12">
+          {% if request.user.is_authenticated %}
+            <button class="btn " type="submit" background-color= "yellow">Submit</button>
+          {% else %}
+            <button class="btn" type="submit" disabled>Login to comment</button>
+          {% endif %}
+      </div>
+    </div>
+  </form>
+</div>
+<br></br>
+<br></br>
+
+
+<b><font size="6">{{ comment_list.count }} Comment{{ comment_list|pluralize }}</font></b>
+<br><br>
+<br><br>
+
+{% for ac in comment_list %}
+  {{ ac.content }}
+  <br><br>
+  <b>{{ ac.user|capfirst }}</b>
+  &nbsp;&nbsp; {{ ac.timestamp }}
+
+
+
+  {% if user.is_authenticated and user == ac.user  %}
+    <a href= "{% url 'comment_delete' pk=ac.film_comment_id comment_id=ac.id  %}">&nbsp;&nbsp; delete</a>
+  {% endif %}
+  <br><br>
+  <br><br>
+{% endfor %}
+
+
+{% endblock %}

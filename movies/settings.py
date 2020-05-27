@@ -16,9 +16,9 @@ import cloudinary.uploader
 import cloudinary.api
 
 cloudinary.config(
-  cloud_name = "dtadoffpu",
-  api_key = "257426891233343",
-  api_secret = "ZeNSz4E3LPLIcgvsrxzf1AhCmk8"
+  cloud_name = os.environ.get('CLOUD_NAME'),
+  api_key = os.environ.get('API_KEY'),
+  api_secret = os.environ.get('API_SECRET')
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -87,10 +87,11 @@ WSGI_APPLICATION = 'movies.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
 
@@ -138,7 +139,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'g2/static/g2/'),
+    os.path.join(BASE_DIR, 'movies_app/static/movies_app/'),
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
